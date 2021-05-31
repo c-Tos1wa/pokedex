@@ -1,0 +1,132 @@
+html{
+  background-color: #282c34
+}
+
+a {
+  text-decoration: none;
+}
+
+/* card-list */
+.card-list{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
+.card-list button:hover{
+  background-color:black;
+}
+
+/* card */
+.card{
+  width: 25vw;
+  background-color: #ffffffff;
+  border: 0.9px solid #ffffffff;
+  border-radius: 5px;
+  color: #31353f;
+  font-size: 16px;
+  padding: 10px 0;
+  margin: 10px;
+  transition: 0.5s;
+}
+
+.card:hover{
+  opacity: 0.7;
+  cursor: pointer;
+  margin-top: -1px;
+}
+
+.card img{
+  width: 100%;
+}
+
+.info{
+  margin: 0px 10px;
+}
+
+.id{
+  text-align: left;
+  margin: 0;
+  color: gray;
+  letter-spacing: 0.2em;
+  font-size: 0.9em;
+}
+
+.card h5 {
+  font-size: 1.5em;
+  margin: 0;
+}
+
+.categoria{
+  display: flex;
+  justify-content: center;
+}
+
+
+/*info*/
+
+.info{
+  background-color: white;
+  padding: 0 15px;
+}
+
+.cabecalho{
+  border-bottom: 1px solid silver;
+  text-align: center;
+  font-size: 1.9em;
+}
+
+.corpo{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.corpo-bloco{
+  width: 50%;
+}
+
+.corpo img{
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 300px;
+  display: block;
+}
+
+
+.corpo-bloco-categoria{
+  margin: 1px;
+}
+
+.corpo-bloco-categoria .type{
+  background-color: green;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 3% 3% 0 0;
+  text-align: center;
+}
+
+
+.rodape{
+  text-align: center;
+  font-size: 1.2em;
+  padding: 10px;
+  border-top: 1px solid silver;
+}
+
+.rodape a{
+  text-decoration: none;
+  background-color: lightblue;
+  padding: 10px 10px;
+  border-radius: 10px;
+  color: rgb(39, 39, 39)
+}
+
+.rodape a:hover{
+  background-color: lightskyblue;
+  margin-left: -5px;
+}
