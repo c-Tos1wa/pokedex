@@ -7,91 +7,83 @@ class Info extends React.Component {
         this.id = parseInt(props.match.params.id);
 
         this.state = {
-            pokemon: {
-                'id': -1,
-                "name": '',
-                "image": '',
-                "height": 0,
-                "weight": 0,
-                "abilities": '',
-                "types": []
-            }
+            isLoaded: false,
+            pokemon: {}
         }
-
-        this.pokemons = {
-            1: {
-                'id': 1,
-                'name': 'Bulbasaur',
-                "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png",
-                "height": 0.7,
-                "weight": 6.9,
-                "abilities": "Overgrow",
-                "types": ['Grass', 'Poison']
-            },
-
-            2: {
-                'id': 2,
-                'name': 'Ivysaur',
-                "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/002.png",
-                "height": 1.0,
-                "weight": 13.0,
-                "abilities": "Overgrow",
-                "types": ['Grass', 'Poison']
-            },
-
-            3: {
-                'id': 3,
-                'name': 'Venusaur',
-                "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/003.png",
-                "height": 2.0,
-                "weight": 100.0,
-                "abilities": "Overgrow",
-                "types": ['Grass', 'Poison']
-            }
-        }
+       
     }
 
     criarTipos(){
-        return this.state.pokemon.types.map((type) => {
-            return <span className='type' key={type}>{type}</span>
+        const pokemon = this.state.pokemon;
+        return pokemon.types.map((tipo) => {
+            const typeName = tipo.type.name;
+            return (
+                <span className='type' key={pokemon.id + '-' + typeName}>
+                    {typeName}
+                </span>
+            );
+        });
+    }
+
+    listaHabilidades(){
+        const pokemon = this.state.pokemon;
+        return pokemon.abilities.map(habilidade => {
+            const nomeHab = habilidade.ability.name;
+            return (
+                <span key={pokemon.id + '- ' + nomeHab} className='habilidade'>
+                    {nomeHab}
+                </span>
+            );
         });
     }
 
     render(){
-        const pokemon = this.state.pokemon
-        return (
-            <section className='info'>
-                <div className='cabecalho'>
-                    {pokemon.name}
-                </div>
-                <div className='corpo'>
-                    <div className='corpo-bloco'>
-                        <img src={pokemon.image} alt={pokemon.name} />
+        const {pokemon, isLoaded} = this.state;
+
+        if (!isLoaded) {
+            return (
+                <div className='info'> Carregando... </div>
+            )
+        } else {
+            const imageID = `000${pokemon.id}`.slice(-3);
+            const imageSRC = `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${imageID}.png`
+            return (
+                <section className='info'>
+                    <div className='cabecalho'>
+                        {pokemon.name}
                     </div>
-                    <div className='corpo-bloco'>
-                        <p><strong>Height:</strong> {`${pokemon.height}m`}</p>
-                        <p><strong>Weight:</strong> {`${pokemon.weight}kg`}</p>
-                        <p><strong>Abilities:</strong> {pokemon.abilities}</p>
-                        <strong>Types:</strong>
-                        <div className='corpo-bloco-categoria'>
-                            {this.criarTipos()}
+                
+                    <div className='corpo'>
+                        <div className='corpo-bloco'>
+                            <img src={imageSRC} alt={pokemon.name} />
+                        </div>
+                        <div className='corpo-bloco'>
+                            <p><strong>Height:</strong> {`${pokemon.height}m`}</p>
+                            <p><strong>Weight:</strong> {`${pokemon.weight}kg`}</p>
+                            <p><strong>Abilities:</strong> {this.listaHabilidades()}</p>
+                            <strong>Types:</strong>
+                            <div className='corpo-bloco-categoria'>
+                                {this.criarTipos()}
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className='rodape'>
-                    <Link to='/'>Voltar</Link>
-                </div>
-            </section>
-        );
-    }
+                    <div className='rodape'>
+                        <Link to='/'>Voltar</Link>
+                    </div>
+                </section>
+                );
+            }
+        }
 
     componentDidMount(){
-        let pokemon = this.pokemons[this.id];
-        if (pokemon){
-            this.setState({
-                pokemon: pokemon
-            })
-        }
+       fetch(`https://pokeapi.co/api/v2/pokemon/${this.id}`)
+       .then(resultado => resultado.json())
+       .then(resultadoJson => {
+           this.setState({
+               isLoaded: true,
+               pokemon: resultadoJson
+           });
+       });
     }
 }
 

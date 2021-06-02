@@ -5,54 +5,49 @@ class cardList extends React.Component {
     constructor(props){
         super(props);
         this.state = {
+            isLoaded: false,
             pokemons: []
         };
     }
 
-    listarPokemons(){
-        const novosPokemons = [
-            {
-                'id': 1,
-                "name": "Bulbasaur",
-                "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png"
-            },
-
-            {
-                "id": 2,
-                "name": "Ivysaur",
-                "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/002.png"
-            },
-            
-            {
-                "id": 3,
-                "name": "Venusaur",
-                "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/003.png"
-            }
-
-        ];
-
-        this.setState({
-            pokemons: novosPokemons
-        });
-    }
-
     criarPokemon(){
         return this.state.pokemons.map((pokemon) => {
-            return <Card pokemon = {pokemon} key = {pokemon.id} />
+            return <Card pokemon = {pokemon} key = {pokemon.name} />
         });
     }
     
     render(){
-        return (
-            <div>
-                <div className = 'card-list'>
-                    {this.criarPokemon()}
+        const isLoaded = this.state.isLoaded;
+
+        //condição no carregamento da página
+        if (!isLoaded) {
+            return (
+                <div className='card-list'> Carregando... </div>
+            )
+        } else {
+            return (
+                <div>
+                    <div className = 'card-list'>
+                        {this.criarPokemon()}
+                    </div>
+                    <button onClick={() => this.listarPokemons()}>
+                        Listar Pokemons
+                    </button>
                 </div>
-                <button onClick={() => this.listarPokemons()}>
-                    Listar Pokemons
-                </button>
-            </div>
-        );
+                );
+            }
+    }
+
+    componentDidMount(){
+        //Método GET
+        fetch('https://pokeapi.co/api/v2/pokemon')
+        .then(resultado => resultado.json()) //transformando em json
+        .then(resultadoJson => {
+            this.setState({ //mudando o estado
+                isLoaded: true,
+                pokemons: resultadoJson.results //pegando o valor da chave results do resultado transformado em JSON
+            })
+        })
     }
 }
 
