@@ -98,16 +98,46 @@ a {
 
 
 .corpo-bloco-categoria{
-  margin: 1px;
+  margin: 15px;
+  
 }
 
 .corpo-bloco-categoria .type{
   background-color: green;
   color: white;
   border-radius: 5px;
-  padding: 5px 10px;
-  margin: 3% 3% 0 0;
+  padding: 10px 20px;
+  margin: 5% 3%;
   text-align: center;
+}
+
+.grass {
+  background-color: green;
+  color: white;
+  border-radius: 5px;
+  margin: 0 20%;
+}
+
+.poison {
+  background-color: purple;
+  color: white;
+  border-radius: 5px;
+  margin: 0 20%;
+}
+
+.fire {
+  background-color: red;
+  color: white;
+  border-radius: 5px;
+  margin: 0 20%;
+}
+
+.water {
+  background-color: blue;
+  color: white;
+  border-radius: 5px;
+  margin: 0 20%;
+
 }
 
 

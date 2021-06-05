@@ -15,7 +15,7 @@ class Card extends React.Component {
         return pokemon.types.map(tipo => {
             const typeName = tipo.type.name;
             return (
-                <div className={`card-category ${typeName}`} key={pokemon.id + '-' + typeName}>
+                <div className={`card-list__card__category card-list__card__category--${typeName}`} key={pokemon.id + '-' + typeName}>
                     <span>{typeName}</span>
                 </div>
             )
@@ -34,13 +34,15 @@ class Card extends React.Component {
             const imgSrc = `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${imageId}.png`;
             return (    
                 <Link to={`/sobre/${pokemon.id}`}>
-                    <div className='card'>
-                        <img src={imgSrc} alt={pokemon.name} />
-                        <div className='info'>
-                            <p className='id'> No {pokemon.id} </p>
+                    <div className='card-list__card'>
+                        <img className='card-list__card__img' src={imgSrc} alt={pokemon.name} />
+                        <div className='card-list__card__info'>
+                            <p className='card-list__card__id'> No {pokemon.id} </p>
                         </div>
-                        <h5>{pokemon.name}</h5>
-                        {this.tipoCategorias()}
+                        <h5 className='card-list__card__name'>{pokemon.name}</h5>
+                        <div className='card-list__card__categories'>
+                            {this.tipoCategorias()}
+                        </div>
                     </div>
                 </Link>
                 );

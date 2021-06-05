@@ -15,6 +15,9 @@ class cardList extends React.Component {
             return <Card pokemon = {pokemon} key = {pokemon.name} />
         });
     }
+
+    listarPokemons() { 
+    }
     
     render(){
         const isLoaded = this.state.isLoaded;
@@ -31,7 +34,7 @@ class cardList extends React.Component {
                         {this.criarPokemon()}
                     </div>
                     <button onClick={() => this.listarPokemons()}>
-                        Listar Pokemons
+                        Listar Mais Pokemons
                     </button>
                 </div>
                 );

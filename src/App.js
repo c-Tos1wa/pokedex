@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import CardList from './components/cardList'
 import Info from './components/info'
 import {BrowserRouter, Route, Switch} from 'react-router-dom'

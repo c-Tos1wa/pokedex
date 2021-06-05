@@ -18,7 +18,7 @@ class Info extends React.Component {
         return pokemon.types.map((tipo) => {
             const typeName = tipo.type.name;
             return (
-                <span className='type' key={pokemon.id + '-' + typeName}>
+                <span className={`info__corpo__categoria__tipo info__corpo__categoria__tipo--${typeName}`} key={pokemon.id + '-' + typeName}>
                     {typeName}
                 </span>
             );
@@ -30,7 +30,7 @@ class Info extends React.Component {
         return pokemon.abilities.map(habilidade => {
             const nomeHab = habilidade.ability.name;
             return (
-                <span key={pokemon.id + '- ' + nomeHab} className='habilidade'>
+                <span key={pokemon.id + '-' + nomeHab} className='habilidade'>
                     {nomeHab}
                 </span>
             );
@@ -49,26 +49,26 @@ class Info extends React.Component {
             const imageSRC = `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${imageID}.png`
             return (
                 <section className='info'>
-                    <div className='cabecalho'>
+                    <div className='info__cabecalho'>
                         {pokemon.name}
                     </div>
                 
-                    <div className='corpo'>
-                        <div className='corpo-bloco'>
-                            <img src={imageSRC} alt={pokemon.name} />
+                    <div className='info__corpo'>
+                        <div className='info__corpo__bloco'>
+                            <img className='info__corpo__img'src={imageSRC} alt={pokemon.name} />
                         </div>
-                        <div className='corpo-bloco'>
-                            <p><strong>Height:</strong> {`${pokemon.height}m`}</p>
-                            <p><strong>Weight:</strong> {`${pokemon.weight}kg`}</p>
+                        <div className='info__corpo__bloco'>
+                            <p><strong>Height:</strong> {`${pokemon.height} m`}</p>
+                            <p><strong>Weight:</strong> {`${pokemon.weight} kg`}</p>
                             <p><strong>Abilities:</strong> {this.listaHabilidades()}</p>
                             <strong>Types:</strong>
-                            <div className='corpo-bloco-categoria'>
+                            <div className='info__corpo__categoria'>
                                 {this.criarTipos()}
                             </div>
                         </div>
                     </div>
-                    <div className='rodape'>
-                        <Link to='/'>Voltar</Link>
+                    <div className='info__rodape'>
+                        <Link className='info__rodape__link'to='/'> Voltar </Link>
                     </div>
                 </section>
                 );
