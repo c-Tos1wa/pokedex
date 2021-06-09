@@ -17,10 +17,10 @@ class cardList extends React.Component {
         });
     }
 
-    buscarPokemons(evento) {
-        const valor = evento.target.value.toLowerCase();
+    buscarPokemons(letras) {
+        const nome = letras.target.value.toLowerCase();
         const pokemon = this.state.pokemonsFiltrados;
-        const pokemonsBuscados = pokemon.filter((pokemon) => pokemon.name.includes(valor))
+        const pokemonsBuscados = pokemon.filter((pokemon) => pokemon.name.includes(nome))
         this.setState ({
             pokemons: pokemonsBuscados 
         });
@@ -38,7 +38,7 @@ class cardList extends React.Component {
             return (
                 <div>
                     <div className='search-box'>
-                        <BuscarCaixa placeholder='Buscar pokemons...' funcaoBuscar={(evento) => this.buscarPokemons(evento)}/>
+                        <BuscarCaixa placeholder='Buscar pokemons...' funcaoBuscar={(letras) => this.buscarPokemons(letras)}/>
                     </div>
                     <div className = 'card-list'>
                         {this.criarPokemon()}
