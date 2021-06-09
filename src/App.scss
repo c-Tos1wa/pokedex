@@ -97,6 +97,22 @@ a {
       }
     }
 }
+
+.search-box {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  margin: 10px auto 0 auto;
+
+    &__input {
+      margin: 0 auto;
+      padding: 0.5em;
+      font-size: 1.2em;
+      width: 100%;
+      border-radius: 5px;
+    }
+}
         
 .info {
   background-color: white;
@@ -161,7 +177,24 @@ a {
           }
         }
       }
-    } 
+}
+    
+@media only screen and (max-width: 800px) {
+  html {
+    background-color: silver;
+  }
+
+  .card-list {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .search-box {
+    width: 80%;
+    max-width: 100%;
+  }
+}
     
   
 

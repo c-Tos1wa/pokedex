@@ -1,5 +1,6 @@
 import React from 'react';
-import Card from './card'
+import Card from './card';
+import BuscarCaixa from './search'
 
 class cardList extends React.Component {
     constructor(props){
@@ -16,7 +17,13 @@ class cardList extends React.Component {
         });
     }
 
-    listarPokemons() { 
+    buscarPokemons(evento) {
+        const valor = evento.target.value.toLowerCase();
+        const pokemon = this.state.pokemonsFiltrados;
+        const pokemonsBuscados = pokemon.filter((pokemon) => pokemon.name.includes(valor))
+        this.setState ({
+            pokemons: pokemonsBuscados 
+        });
     }
     
     render(){
@@ -30,6 +37,9 @@ class cardList extends React.Component {
         } else {
             return (
                 <div>
+                    <div className='search-box'>
+                        <BuscarCaixa placeholder='Buscar pokemons...' funcaoBuscar={(evento) => this.buscarPokemons(evento)}/>
+                    </div>
                     <div className = 'card-list'>
                         {this.criarPokemon()}
                     </div>
@@ -44,11 +54,12 @@ class cardList extends React.Component {
     componentDidMount(){
         //Método GET
         fetch('https://pokeapi.co/api/v2/pokemon')
-        .then(resultado => resultado.json()) //transformando em json
+        .then(resultado => resultado.json()) 
         .then(resultadoJson => {
-            this.setState({ //mudando o estado
+            this.setState({ 
                 isLoaded: true,
-                pokemons: resultadoJson.results //pegando o valor da chave results do resultado transformado em JSON
+                pokemons: resultadoJson.results,
+                pokemonsFiltrados: resultadoJson.results
             })
         })
     }
